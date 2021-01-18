@@ -1,0 +1,8 @@
+#!/bin/sh
+if [ ! -f config.def.h ] && [ $(pwd) == '/home/eli/repos/dwm' ]
+then
+    exit
+else
+    trash-put ~/repos/dwm/config.h
+    sudo make clean install
+fi

@@ -1,0 +1,13 @@
+#!/bin/sh
+Choice=$(echo -e "Screen\nWindow" | dmenu -c -p "Choose where:" )
+if [ $Choice == "Screen" ]
+then
+    scrot -d 1 -e 'mv $f ~/media/screenshots/'
+    notify-send "Screen Grabbed"
+elif [ $Choice == "Window" ]
+then
+    scrot -d 1 -u -e 'mv $f ~/media/screenshots/'
+    notify-send "Window Grabbed"
+fi
+
+

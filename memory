@@ -1,0 +1,8 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+	1) setsid -f "$TERMINAL" -e htop ;;
+	3) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+free -h | awk '/^Mem/ { print $3"/"$2 }' | sed s/i//g

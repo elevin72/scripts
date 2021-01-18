@@ -1,0 +1,12 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+	1) keyboardToggle ;;
+	3) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+[ $(xkb-switch) = "us" ] && echo " en" || echo " he"
+
+
+
+

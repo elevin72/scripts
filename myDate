@@ -1,0 +1,8 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+	1) setsid -f "$TERMINAL" -e calcurse ;;
+	3) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+echo " $(date '+%-d %b')     $(date '+%R')"

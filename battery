@@ -1,0 +1,52 @@
+#!/bin/sh
+sleep 2 # it takes a few seconds for all the charging info to update
+
+STATUS=$(cat /sys/class/power_supply/BAT1/status 2>/dev/null)
+CAPACITY=$(cat /sys/class/power_supply/BAT1/capacity 2>/dev/null) 
+OLDSTATUS=$(sed -n '1p' < ~/.local/share/batteryStatus)
+OLDCAPACITY=$(sed -n '2p' < ~/.local/share/batteryStatus)
+[ $STATUS == "Unknown" ] && STATUS="Charging"
+
+# cases *that we care about* :
+# 1) if nothing has changed: exit
+# 2) if status changed from charging to not charging and cap < 20
+# 3) if cap went from > 20 to <= 20
+# 4) if cap went from > 5 to <= 5
+
+if [[ $STATUS == "$OLDSTATUS" && $CAPACITY == $OLDCAPACITY ]]
+then 
+    OLDICON=$(sed -n '3p' < ~/.local/share/batteryStatus)
+    echo "$OLDICON $OLDCAPACITY%"
+    exit 1
+elif [[ $STATUS == "Discharging" && $OLDSTATUS == "Charging" ]] && (($CAPACITY <= 20)) \
+    || (($CAPACITY <= 20 && $OLDCAPACITY > 20)) \
+    || (($CAPACITY <= 5 && $OLDCAPACITY > 5))
+then
+    notify-send "Low Battery!"
+fi
+
+sed -i "1s/.*/$STATUS/" ~/.local/share/batteryStatus
+sed -i "2s/.*/$CAPACITY/" ~/.local/share/batteryStatus
+
+if [[ $STATUS == "Charging" ]] 
+then
+    ICON=""
+elif  ((0 <= $CAPACITY && $CAPACITY <= 20))
+then
+    ICON="!"
+elif ((21 <= $CAPACITY && $CAPACITY <= 39))
+then
+    ICON=""
+elif ((40 <= $CAPACITY && $CAPACITY <= 59))
+then
+    ICON=""
+elif ((60 <= $CAPACITY && $CAPACITY <= 79))
+then
+    ICON=""
+else
+    ICON=""
+fi
+
+sed -i "3s/.*/$ICON/" ~/.local/share/batteryStatus
+
+echo "$ICON $CAPACITY%"

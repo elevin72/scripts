@@ -1,0 +1,26 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+	1) setsid -f "$TERMINAL" -e pulsemixer ;;
+	3) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+VOLUME=$(pamixer --get-volume)
+VOLUME_HUMAN=$(pamixer --get-volume-human)
+
+if ((85 <= VOLUME))
+then 
+    OUT="墳 $VOLUME_HUMAN"
+elif ((45 <= VOLUME && VOLUME <= 84))
+then 
+    OUT="奔$VOLUME_HUMAN"
+elif ((0 <= VOLUME && VOLUME <= 44))
+then 
+    OUT="奄$VOLUME_HUMAN"
+elif ((VOLUME_HUMAN = "muted"))
+then 
+    OUT=" mute"
+fi
+
+
+echo $OUT

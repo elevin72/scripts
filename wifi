@@ -1,0 +1,15 @@
+#!/bin/bash
+# This is functional, but could be better
+if [ -z "$1" ] 
+then 
+    nmcli -p device wifi
+elif [ ! -z "$1" ] && [ -z "$2" ]
+then
+    echo "Enter password for network $1: "
+    read PASS
+    nmcli device wifi connect $1 password $PASS 
+elif [ ! -z "$1" ] && [ ! -z "$2" ]
+then
+    nmcli device wifi connect $1 password $2 
+fi
+exit

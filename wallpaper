@@ -1,0 +1,11 @@
+#!/bin/sh
+if [  -z "$1" ]
+then
+    echo "No argument given!"
+    exit
+else
+    rm ~/.local/share/wallpaper/* ~/media/wallpapers/
+    cp $1 ~/.local/share/wallpaper/
+    xwallpaper --zoom ~/.local/share/wallpaper/*
+fi
+

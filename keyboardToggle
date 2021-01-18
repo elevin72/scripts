@@ -1,0 +1,15 @@
+#!/bin/sh
+
+function toggle() {
+    layout=$(xkb-switch)
+    if [ $layout == us ]
+    then
+        setxkbmap il
+    else
+        setxkbmap us
+    fi
+}
+
+toggle
+
+

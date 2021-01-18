@@ -1,0 +1,6 @@
+#!/bin/bash
+
+DEVID=$(xinput | grep "Elantech Touchpad" | grep -o -E '=[0-9]{1,}' | grep -o -E '[0-9]{1,}') # this is horrificly bad grepping
+PROPID=$(xinput list-props $DEVID | grep "Synaptics Scrolling Distance" | grep -o -E '[0-9]{1,}' | head -n1)
+xinput set-prop $DEVID $PROPID -40 -40
+synclient HorizTwoFingerScroll=1

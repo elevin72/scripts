@@ -1,0 +1,4 @@
+#!/bin/sh
+
+pgrep picom 2> /dev/null && pkill picom 2> /dev/null || picom 
+

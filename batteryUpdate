@@ -1,0 +1,4 @@
+#!/bin/bash
+#update signal + 34 from some mysterios reason
+kill -45 $(pidof dwmblocks)
+#echo "$(date +%T)" >> /home/eli/bin/ac.log

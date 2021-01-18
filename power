@@ -1,0 +1,8 @@
+#!/bin/zsh
+case "$(echo -e "Shutdown\nRestart\nLogout\nSuspend\nLock" | dmenu -c -p "Power:" -l 5)" in
+        Shutdown) exec systemctl poweroff;;
+        Restart) exec systemctl reboot;;
+        Logout) killall dwm;;
+        Suspend) exec systemctl suspend;;
+        Lock) slock;;
+esac

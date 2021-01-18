@@ -1,0 +1,10 @@
+#!/bin/bash
+
+LOCATION=Maale+Adumim
+function getWeather {
+    DL=$(curl wttr.in/$LOCATION?format=2 2>/dev/null)
+    WEATHER=${DL#*🌡️}
+    WEATHER2=${DL#*🌡️  → }
+    echo $WEATHER
+}
+getWeather
