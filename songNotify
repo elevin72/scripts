@@ -1,0 +1,11 @@
+#!/bin/sh
+sleep 2
+song=$(playerctl --player spotifyd metadata --format "Title: {{ xesam:title }}\nArtist: {{ xesam:artist }}\nAlbum: {{ xesam:album }}")
+oldSong=$(cat ~/.cache/spotifyd/current-song)
+if [[ "" == "$song" ]]; then
+    echo "empty song"; exit
+elif [[ "$song" == "$oldSong" ]]; then
+    echo "same song"; exit
+fi
+echo $song > ~/.cache/spotifyd/current-song
+notify-send "Spotify" "$song" --icon=~/.config/spotifyd/spotify.png

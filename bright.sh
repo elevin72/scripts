@@ -35,9 +35,9 @@ else
 fi
 
 if [[ $up == "true" ]]; then
-    brightnessctl --device=$mon set +5%
+    brightnessctl --device=$mon set +1%
 else
-    brightnessctl --device=$mon set 5%-
+    brightnessctl --device=$mon set 1%-
 fi
 
 
