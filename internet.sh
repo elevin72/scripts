@@ -20,8 +20,8 @@ case "$(cat /sys/class/net/w*/operstate 2>/dev/null)" in
 	down) wifiicon="睊 " ;;
 	up) wifiicon="$(awk '/^\s*w/ { print "直", int($3 * 100 / 70) "% " }' /proc/net/wireless)" ;;
 esac
-sed -i  "1s/.*/$wifiicon/" ~/.local/share/wifiStatus
-getstatus=$(sed -n '1p' < ~/.local/share/wifiStatus)
+# sed -i  "1s/.*/$wifiicon/" ~/.local/share/wifiStatus
+# getstatus=$(sed -n '1p' < ~/.local/share/wifiStatus)
 
-printf "%s%s%s\n" "$getstatus"
+printf "%s%s%s\n" "$wifiicon"
 

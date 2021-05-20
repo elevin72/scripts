@@ -18,7 +18,7 @@ GRADLE_HOME=$HOME/gradle /usr/lib/jvm/java-15-openjdk/bin/java \
   -Xmx2G \
   -jar $(echo "$JAR") \
   -configuration "$HOME/repos/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/config_linux" \
-  -data "${1:-$HOME/workspace}" \
+  -data "${1:-$HOME/.local/share/eclipseWorkspaces}" \
   --add-modules=ALL-SYSTEM \
   --add-opens java.base/java.util=ALL-UNNAMED \
   --add-opens java.base/java.lang=ALL-UNNAMED

@@ -1,4 +1,5 @@
 #!/bin/sh
+
 sleep 2 # it takes a few seconds for all the charging info to update
 
 STATUS=$(cat /sys/class/power_supply/BAT1/status 2>/dev/null)
